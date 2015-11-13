@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:rim="http://www.blackberry.com/ns/widgets"
+        id="cordova-plugin-minimalbarcode"
+        version="1.0.2">
+
+  <name>Minimalbarcode</name>
+  <description>barcodescanner just for android/ios, forked form phonegap/phonegap-plugin-barcodescanner
+  </description>
+  <license>MIT</license>
+
+  <engines>
+    <engine name="cordova" version=">=3.0.0"/>
+  </engines>
+
+  <js-module src="www/minimalbarcode.js" name="Minimalbarcode">
+    <clobbers target="cordova.plugins.Minimalbarcode"/>
+  </js-module>
+
+  <!-- ios -->
+  <platform name="ios">
+    <!-- Cordova >= 2.8 -->
+    <config-file target="config.xml" parent="/*">
+      <feature name="Minimalbarcode">
+        <param name="ios-package" value="CDVBarcodeScanner"/>
+      </feature>
+    </config-file>
+
+    <resource-file src="src/ios/scannerOverlay.xib"/>
+    <resource-file src="src/ios/CDVBarcodeScanner.bundle"/>
+
+    <header-file src="src/ios/zxing-all-in-one.h"/>
+
+    <source-file src="src/ios/CDVBarcodeScanner.mm" compiler-flags="-fno-objc-arc"/>
+    <source-file src="src/ios/zxing-all-in-one.cpp"/>
+
+    <framework src="libiconv.dylib"/>
+    <framework src="AVFoundation.framework"/>
+    <framework src="AssetsLibrary.framework"/>
+    <framework src="CoreVideo.framework"/>
+    <framework src="QuartzCore.framework"/>
+    <framework src="CoreGraphics.framework"/>
+    <framework src="CoreImage.framework"/>
+    <framework src="AudioToolbox.framework"/>
+  </platform>
+
+  <!-- android -->
+  <platform name="android">
+
+    <source-file src="src/android/com/Zxing/CaptureActivity.java"
+                 target-dir="src/com/Zxing/"/>
+
+     <source-file src="src/android/com/Zxing/BarcodeScanner.java"
+                 target-dir="src/com/Zxing/"/>
+
+    <source-file src="src/android/com/Zxing/camera/AutoFocusCallback.java"
+                 target-dir="src/com/Zxing/camera"/>
+    <source-file src="src/android/com/Zxing/camera/CameraConfigurationManager.java"
+                 target-dir="src/com/Zxing/camera"/>
+    <source-file src="src/android/com/Zxing/camera/CameraManager.java"
+                 target-dir="src/com/Zxing/camera"/>
+    <source-file src="src/android/com/Zxing/camera/FlashlightManager.java"
+                 target-dir="src/com/Zxing/camera"/>
+    <source-file src="src/android/com/Zxing/camera/PlanarYUVLuminanceSource.java"
+                 target-dir="src/com/Zxing/camera"/>
+    <source-file src="src/android/com/Zxing/camera/PreviewCallback.java"
+                 target-dir="src/com/Zxing/camera"/>
+
+    <source-file src="src/android/com/Zxing/decoding/CaptureActivityHandler.java"
+                 target-dir="src/com/Zxing/decoding"/>
+    <source-file src="src/android/com/Zxing/decoding/DecodeFormatManager.java"
+                 target-dir="src/com/Zxing/decoding"/>
+    <source-file src="src/android/com/Zxing/decoding/DecodeHandler.java"
+                 target-dir="src/com/Zxing/decoding"/>
+    <source-file src="src/android/com/Zxing/decoding/DecodeThread.java"
+                 target-dir="src/com/Zxing/decoding"/>
+    <source-file src="src/android/com/Zxing/decoding/FinishListener.java"
+                 target-dir="src/com/Zxing/decoding"/>
+    <source-file src="src/android/com/Zxing/decoding/InactivityTimer.java"
+                 target-dir="src/com/Zxing/decoding"/>
+    <source-file src="src/android/com/Zxing/decoding/Intents.java"
+                 target-dir="src/com/Zxing/decoding"/>
+    <source-file src="src/android/com/Zxing/decoding/RGBLuminanceSource.java"
+                 target-dir="src/com/Zxing/decoding"/>
+    <source-file src="src/android/com/Zxing/decoding/Utils.java"
+                 target-dir="src/com/Zxing/decoding"/>
+
+    <source-file src="src/android/com/Zxing/view/ViewfinderResultPointCallback.java"
+                 target-dir="src/com/Zxing/view"/>
+    <source-file src="src/android/com/Zxing/view/ViewfinderView.java"
+                 target-dir="src/com/Zxing/view"/>
+
+    <source-file src="src/android/res/drawable-hdpi/mo_scanner_album.png"
+                 target-dir="res/drawable-hdpi"/>
+    <source-file src="src/android/res/drawable-hdpi/mo_scanner_arrow.png"
+                 target-dir="res/drawable-hdpi"/>
+    <source-file src="src/android/res/drawable-hdpi/mo_scanner_back_img.png"
+                 target-dir="res/drawable-hdpi"/>
+    <source-file src="src/android/res/drawable-hdpi/mo_scanner_bg.png"
+                 target-dir="res/drawable-hdpi"/>
+    <source-file src="src/android/res/drawable-hdpi/mo_scanner_light_light.png"
+                 target-dir="res/drawable-hdpi"/>
+    <source-file src="src/android/res/drawable-hdpi/mo_scanner_light.png"
+                 target-dir="res/drawable-hdpi"/>
+
+    <source-file src="src/android/res/layout/mo_scanner_main.xml"
+                 target-dir="res/layout"/>
+    <source-file src="src/android/res/layout/qrcode.xml"
+                 target-dir="res/layout"/>
+
+    <source-file src="src/android/res/raw/mo_scanner_beep.ogg" target-dir="res/raw"/>
+
+    <source-file src="src/android/res/values/ids.xml" target-dir="res/values"/>
+
+    <source-file src="src/android/com.google.zxing.client.android.captureactivity.jar" target-dir="libs"/>
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="Minimalbarcode">
+        <param name="android-package" value="com.Zxing.BarcodeScanner"/>
+      </feature>
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <activity
+        android:name="com.Zxing.CaptureActivity"
+        android:clearTaskOnLaunch="true"
+        android:configChanges="orientation|keyboardHidden"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+        android:windowSoftInputMode="stateAlwaysHidden"
+        android:exported="false">
+        <intent-filter>
+          <action android:name="com.google.zxing.client.android.SCAN"/>
+          <category android:name="android.intent.category.DEFAULT"/>
+        </intent-filter>
+      </activity>
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+        <uses-permission android:name="android.permission.CAMERA" />
+        <uses-permission android:name="android.permission.FLASHLIGHT" />
+        <!-- Not required to allow users to work around this -->
+        <uses-feature android:name="android.hardware.camera" android:required="false" />
+    </config-file>
+
+  </platform>
+
+</plugin>
